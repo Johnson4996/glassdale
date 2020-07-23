@@ -1,0 +1,24 @@
+.criminalsContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+
+
+
+.criminal_card{
+    border: 1px dotted gray;
+    height:149px;
+    width: 280px;
+    padding: 1rem;
+    margin: 2rem;
+}
+
+.criminal__name{
+    margin-right: 4rem;
+}
+
+.criminal__start,.criminal__end{
+    margin-top: -1rem;
+}
