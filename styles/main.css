@@ -1,2 +1,16 @@
 @import "./criminals.css";
-@import "./filters.css"
+@import "./filters.css";
+
+.noteFormContainer{
+    margin: 2rem;
+}
+.noteForm{
+   display: flex;
+   justify-content: center;
+}
+
+input{
+    margin-left: .5rem;
+    margin-right: .5rem;
+}
+
