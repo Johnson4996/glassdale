@@ -9,7 +9,7 @@
    justify-content: center;
 }
 
-input{
+input, textarea{
     margin-left: .5rem;
     margin-right: .5rem;
 }
