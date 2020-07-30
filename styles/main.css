@@ -1,13 +1,8 @@
 @import "./criminals.css";
 @import "./filters.css";
+@import "./notes.css";
 
-.noteFormContainer{
-    margin: 2rem;
-}
-.noteForm{
-   display: flex;
-   justify-content: center;
-}
+
 
 input, textarea{
     margin-left: .5rem;

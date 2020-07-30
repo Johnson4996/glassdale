@@ -1,0 +1,18 @@
+.noteFormContainer{
+    margin: 2rem;
+}
+.noteForm{
+   display: flex;
+   justify-content: center;
+}
+
+.note{
+    margin: 2rem;
+    border: dotted 1px black;
+    padding: 1rem;
+}
+
+.noteList{
+    display: flex;
+    overflow-x: scroll;
+}
