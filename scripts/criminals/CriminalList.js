@@ -2,6 +2,7 @@ import { useCriminals, getCriminals} from "./CriminalDataProvider.js"
 import {criminalHTML} from "./CriminalHTML.js"
 import { useConvictions } from "../convictions/ConvictionsProvider.js"
 import { useOfficers } from "../officers/OfficerDataProvider.js"
+import "./AssociatesDialog.js";
 
 
 
@@ -42,6 +43,19 @@ eventHub.addEventListener('crimeChosen' , crimeSelected =>{
        })
         render(filteredCriminals)
         
+    })
+
+
+    eventHub.addEventListener("click", alibiClicked =>{
+        if(alibiClicked.target.id.startsWith("associates--")){
+            const [prompt, criminalId] = alibiClicked.target.id.split("--")
+            const alibiEvent = new CustomEvent("associatesClicked",{
+                detail:{
+                    chosenCriminal: criminalId
+                }
+            })
+            eventHub.dispatchEvent(alibiEvent)
+        }
     })
        
 
