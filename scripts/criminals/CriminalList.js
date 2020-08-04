@@ -45,8 +45,9 @@ eventHub.addEventListener('crimeChosen' , crimeSelected =>{
         
     })
 
-
+//listen for when user clicks on associate alibis button
     eventHub.addEventListener("click", alibiClicked =>{
+        //make sure user clicked on the alibi button
         if(alibiClicked.target.id.startsWith("associates--")){
             const [prompt, criminalId] = alibiClicked.target.id.split("--")
             const alibiEvent = new CustomEvent("associatesClicked",{
