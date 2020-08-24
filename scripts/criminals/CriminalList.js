@@ -3,12 +3,18 @@ import {criminalHTML} from "./CriminalHTML.js"
 import { useConvictions } from "../convictions/ConvictionsProvider.js"
 import { useOfficers } from "../officers/OfficerDataProvider.js"
 import "./AssociatesDialog.js";
+import { getCriminalFacilities, useCriminalFacilities } from "../facility/CriminalFacilityProvider.js";
+import { getFacilities, useFacilities } from "../facility/FacilityProvider.js";
 
 
 
 
 const  eventHub = document.querySelector(".container")
 let criminalElement = document.querySelector(".criminalsContainer")
+
+let crimArr =[]
+let facilities = []
+let criminalFacilities =[]
 
 
 eventHub.addEventListener('crimeChosen' , crimeSelected =>{
@@ -61,10 +67,21 @@ eventHub.addEventListener('crimeChosen' , crimeSelected =>{
 
 
     //render criminals to DOM
-       const render = (arrayOfCriminals) =>{
+       const render = () =>{
            let criminalHTMLrep = ""
-           arrayOfCriminals.forEach(criminal =>{
+           crimArr.map(criminal =>{
+               const facilityRelationships = criminalFacilities.filter(fac =>{
+                   return criminal.id === fac.criminalId
+               })
+               const facilityName = facilityRelationships.map(cf =>{
+                   return facilities.find(facility =>{
+                       return facility.id === cf.facilityId
+                   })
+               })
+               criminal.facility = facilityName
+               console.log(criminal)
                criminalHTMLrep += criminalHTML(criminal)
+
            })
 
            criminalElement.innerHTML = `${criminalHTMLrep}`
@@ -77,13 +94,12 @@ eventHub.addEventListener('crimeChosen' , crimeSelected =>{
 export const criminalList = () =>{
 
 getCriminals()
+.then(getCriminalFacilities)
+.then(getFacilities)
 .then(() =>{
-    const crimArr = useCriminals()
-    crimArr.forEach(criminal => {
-        criminalElement.innerHTML += criminalHTML(criminal)
-    });
+    crimArr = useCriminals()
+    criminalFacilities = useCriminalFacilities()
+    facilities = useFacilities()
+    render()
 } )
-
-
-
 }
