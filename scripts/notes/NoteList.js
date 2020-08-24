@@ -1,26 +1,50 @@
-import { getNotes, useNotes } from "./NoteDataProvider.js"
-import { NoteHTMLConverter } from "./Note.js"
+import {
+    getNotes,
+    useNotes
+} from "./NoteDataProvider.js"
+import {
+    NoteHTMLConverter
+} from "./Note.js"
+import {
+    useCriminals
+} from "../criminals/CriminalDataProvider.js"
 
 const contentTarget = document.querySelector(".noteList")
 const eventHub = document.querySelector(".container")
 
-eventHub.addEventListener("showNotesClicked", customEvent =>{
-    NoteList()
+let allNotes = []
+
+eventHub.addEventListener("showNotesClicked", customEvent => {
+    render()
 })
 
-export const NoteList = () =>{
+eventHub.addEventListener("noteStateChanged", customEvent => {
+    allNotes = useNotes()
+    render()
+})
+
+export const NoteList = () => {
     getNotes()
-        .then(()=>{
-            const allNotes = useNotes()
-            rendered(allNotes)
+        .then(() => {
+            allNotes = useNotes()
         })
 }
 
-const rendered = (noteArray) =>{
-    const allNotesConvertedToStrings = noteArray.map(
-        (currentNote) =>{
+const render = () => {
+    const allNotesConvertedToHTML = allNotes.map(
+        (currentNote) => {
+            getNoteCriminal(currentNote)
             return NoteHTMLConverter(currentNote)
         }
     ).join("")
-    contentTarget.innerHTML = allNotesConvertedToStrings
+    contentTarget.innerHTML = allNotesConvertedToHTML
+}
+
+const getNoteCriminal = (note) => {
+    let criminals = useCriminals()
+    const foundCriminal = criminals.find(crim => {
+        return crim.id === note.criminalId
+    })
+    note.criminal = foundCriminal
+    return note
 }

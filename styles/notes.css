@@ -3,7 +3,7 @@
 }
 .noteForm{
    display: flex;
-   justify-content: center;
+   justify-content: space-evenly;
 }
 
 .note{
@@ -16,3 +16,4 @@
     display: flex;
     overflow-x: scroll;
 }
+
