@@ -4,9 +4,12 @@ import { officerSelect } from "./officers/OfficerSelect.js";
 import { noteForm } from "./notes/NoteForm.js";
 import { showNoteButton } from "./notes/ShowNoteButton.js";
 import "./notes/NoteList.js";
+import { NoteList } from "./notes/NoteList.js";
 
-noteForm()
+
 criminalList()
 convictionSelect()
 officerSelect()
 showNoteButton()
+noteForm()
+NoteList()
